@@ -1,13 +1,14 @@
 import type { APIRoute } from 'astro';
+import { clerkClient } from '@clerk/astro/server';
 import { prisma } from '../../../lib/prisma';
 
-export const POST: APIRoute = async ({ request, locals }) => {
-  const auth = locals.auth();
+export const POST: APIRoute = async (context) => {
+  const auth = context.locals.auth();
   if (!auth.userId) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
   }
 
-  const body = await request.json();
+  const body = await context.request.json();
   const { code } = body;
 
   if (!code || typeof code !== 'string') {
@@ -31,6 +32,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
       return new Response(JSON.stringify({ error: 'Invite code has reached maximum uses' }), { status: 410 });
     }
 
+    // Add user to the Clerk organization
+    const clerk = clerkClient(context);
+    await clerk.organizations.createOrganizationMembership({
+      organizationId: invite.orgId,
+      userId: auth.userId,
+      role: 'org:member',
+    });
+
+    // Increment invite usage
     await prisma.inviteCode.update({
       where: { id: invite.id },
       data: { uses: { increment: 1 } },

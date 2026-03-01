@@ -43,6 +43,12 @@ export default function OrgOnboarding({ locale = 'nl' }: OrgOnboardingProps) {
         const data = await res.json();
         throw new Error(data.error || 'Failed to create organization');
       }
+      const data = await res.json();
+      // Set the new org as active in Clerk's session
+      const clerk = (window as any).Clerk;
+      if (clerk) {
+        await clerk.setActive({ organization: data.id });
+      }
       window.location.href = '/';
     } catch (err: any) {
       setError(err.message);
@@ -64,6 +70,12 @@ export default function OrgOnboarding({ locale = 'nl' }: OrgOnboardingProps) {
       if (!res.ok) {
         const data = await res.json();
         throw new Error(data.error || 'Invalid invite code');
+      }
+      const data = await res.json();
+      // Set the joined org as active in Clerk's session
+      const clerk = (window as any).Clerk;
+      if (clerk) {
+        await clerk.setActive({ organization: data.orgId });
       }
       window.location.href = '/';
     } catch (err: any) {

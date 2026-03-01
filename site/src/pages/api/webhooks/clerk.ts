@@ -21,6 +21,55 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     switch (type) {
+      // User events
+      case 'user.created': {
+        const email = data.email_addresses?.[0]?.email_address;
+        if (email) {
+          await prisma.user.upsert({
+            where: { id: data.id },
+            update: {
+              email,
+              name: [data.first_name, data.last_name].filter(Boolean).join(' ') || null,
+              avatar: data.image_url || null,
+            },
+            create: {
+              id: data.id,
+              email,
+              name: [data.first_name, data.last_name].filter(Boolean).join(' ') || null,
+              avatar: data.image_url || null,
+            },
+          });
+        }
+        break;
+      }
+      case 'user.updated': {
+        const email = data.email_addresses?.[0]?.email_address;
+        if (email) {
+          await prisma.user.upsert({
+            where: { id: data.id },
+            update: {
+              email,
+              name: [data.first_name, data.last_name].filter(Boolean).join(' ') || null,
+              avatar: data.image_url || null,
+            },
+            create: {
+              id: data.id,
+              email,
+              name: [data.first_name, data.last_name].filter(Boolean).join(' ') || null,
+              avatar: data.image_url || null,
+            },
+          });
+        }
+        break;
+      }
+      case 'user.deleted': {
+        await prisma.user.delete({
+          where: { id: data.id },
+        }).catch(() => {});
+        break;
+      }
+
+      // Organization events
       case 'organization.created': {
         await prisma.organization.upsert({
           where: { id: data.id },
@@ -44,6 +93,29 @@ export const POST: APIRoute = async ({ request }) => {
         await prisma.organization.delete({
           where: { id: data.id },
         }).catch(() => {});
+        break;
+      }
+
+      // Organization membership events
+      case 'organizationMembership.created': {
+        const userId = data.public_user_data?.user_id;
+        const orgId = data.organization?.id;
+        if (userId && orgId) {
+          await prisma.user.update({
+            where: { id: userId },
+            data: { orgId },
+          }).catch(() => {});
+        }
+        break;
+      }
+      case 'organizationMembership.deleted': {
+        const userId = data.public_user_data?.user_id;
+        if (userId) {
+          await prisma.user.update({
+            where: { id: userId },
+            data: { orgId: null },
+          }).catch(() => {});
+        }
         break;
       }
     }

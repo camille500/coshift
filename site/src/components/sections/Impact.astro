@@ -1,0 +1,71 @@
+---
+import type { Locale } from '../../i18n/utils';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const counterData = [
+  { value: '85', suffix: '%' },
+  null,
+  { value: '100', suffix: '%' },
+];
+---
+
+<section id="impact" class="section section-impact">
+  <p class="section-label reveal">{t('impact.label')}</p>
+  <h2 class="section-title reveal reveal-delay-1">{t('impact.title.1')} <span class="gradient-text">{t('impact.title.2')}</span>.</h2>
+  <p class="section-desc reveal reveal-delay-2">{t('impact.desc')}</p>
+  <div class="impact-grid">
+    {[1, 2, 3].map((i) => (
+      <div class={`impact-card glass reveal reveal-delay-${i}`}>
+        <div class="impact-before">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <span>{t(`impact.${i}.before`)}</span>
+        </div>
+        <div class="impact-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+        <div class="impact-after">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>{t(`impact.${i}.after`)}</span>
+        </div>
+        <div class="impact-metric">
+          {counterData[i-1] ? (
+            <span class="impact-metric-value" data-counter-value={counterData[i-1]!.value} data-counter-suffix={counterData[i-1]!.suffix}>0{counterData[i-1]!.suffix}</span>
+          ) : (
+            <span class="impact-metric-value">{t(`impact.${i}.metric`)}</span>
+          )}
+          <span class="impact-metric-label">{t(`impact.${i}.metricLabel`)}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+  <p class="impact-bottom reveal">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    {t('impact.bottom')}
+  </p>
+</section>
+
+<style>
+  .section-impact { background: linear-gradient(180deg, transparent, var(--bg-surface), transparent); }
+  .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .impact-card { padding: 32px; display: flex; flex-direction: column; gap: 16px; transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease; }
+  .impact-card:hover { border-color: var(--card-border); transform: translateY(-3px); box-shadow: var(--card-shadow-hover); }
+  .impact-before { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: var(--text-muted); text-decoration: line-through; opacity: 0.6; }
+  .impact-arrow { display: flex; justify-content: center; animation: bounce-right 2s ease-in-out infinite; }
+  .impact-after { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-primary); font-weight: 500; }
+  .impact-metric { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-glass); display: flex; align-items: baseline; gap: 8px; }
+  .impact-metric-value { font-family: var(--font-display); font-size: 2.25rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+  .impact-metric-label { font-size: 0.8125rem; color: var(--text-muted); font-weight: 500; }
+  .impact-bottom { text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 48px; font-size: 1.0625rem; color: var(--text-secondary); font-weight: 500; }
+
+  @media (max-width: 900px) {
+    .impact-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  }
+  @media (min-width: 601px) and (max-width: 1024px) {
+    .impact-grid { grid-template-columns: repeat(2, 1fr); }
+    .impact-grid .impact-card:last-child { grid-column: span 2; max-width: 420px; margin: 0 auto; }
+  }
+</style>

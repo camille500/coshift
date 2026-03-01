@@ -1,0 +1,25 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import { prisma } from '../../../lib/prisma';
+
+const { slug } = Astro.params;
+
+const post = await prisma.blogPost.findFirst({
+  where: { slug, locale: 'en', published: true },
+});
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+---
+
+<BlogLayout
+  title={post.title}
+  description={post.description}
+  locale="en"
+  date={post.publishedAt ?? post.createdAt}
+  tags={post.tags}
+  author={post.author}
+>
+  <Fragment set:html={post.contentHtml} />
+</BlogLayout>

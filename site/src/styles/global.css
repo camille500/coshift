@@ -1,0 +1,165 @@
+/* ===== LIGHT MODE (default) ===== */
+:root {
+  --bg-deep: #ffffff;
+  --bg-elevated: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-surface: #fbf6fe;
+  --border-glass: rgba(0, 0, 0, 0.06);
+  --border-subtle: rgba(0, 0, 0, 0.04);
+
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a5a;
+  --text-muted: #787890;
+
+  --accent: #00b894;
+  --accent-dim: rgba(0, 184, 148, 0.1);
+  --accent-cyan: #00b894;
+  --accent-violet: #6c5ce7;
+  --accent-gold: #b8860b;
+  --glow-subtle: rgba(0, 184, 148, 0.06);
+
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.06), 0 12px 40px rgba(0, 0, 0, 0.08);
+  --card-border: rgba(0, 0, 0, 0.06);
+  --card-bg: #ffffff;
+  --card-bg-hover: #fafafa;
+
+  --header-bg-scrolled: rgba(255, 255, 255, 0.85);
+  --mobile-nav-bg: rgba(255, 255, 255, 0.97);
+
+  --input-bg: rgba(0, 0, 0, 0.02);
+  --input-border: rgba(0, 0, 0, 0.1);
+
+  --code-bg: rgba(0, 0, 0, 0.04);
+  --pre-bg: #f5f5f8;
+
+  --chat-panel-bg: rgba(255, 255, 255, 0.95);
+
+  --aurora-opacity: 0.5;
+  --grid-opacity: 0.4;
+  --cursor-glow-opacity: 0.4;
+  --sparkle-opacity: 0.5;
+
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] {
+  --bg-deep: #030306;
+  --bg-elevated: #0a0a0f;
+  --bg-card: rgba(14, 14, 22, 0.8);
+  --bg-glass: rgba(255, 255, 255, 0.02);
+  --bg-surface: rgba(0, 212, 170, 0.018);
+  --border-glass: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+
+  --text-primary: #f4f4f6;
+  --text-secondary: #b4b4c0;
+  --text-muted: #787890;
+
+  --accent: #00d4aa;
+  --accent-dim: rgba(0, 212, 170, 0.15);
+  --accent-cyan: #00d4aa;
+  --accent-violet: #7c6bda;
+  --accent-gold: #c9a227;
+  --glow-subtle: rgba(0, 212, 170, 0.08);
+
+  --card-shadow: none;
+  --card-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.2);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-bg: rgba(14, 14, 22, 0.8);
+  --card-bg-hover: rgba(255, 255, 255, 0.04);
+
+  --header-bg-scrolled: rgba(3, 3, 6, 0.85);
+  --mobile-nav-bg: rgba(3, 3, 6, 0.97);
+
+  --input-bg: rgba(0, 0, 0, 0.35);
+  --input-border: rgba(255, 255, 255, 0.06);
+
+  --code-bg: rgba(255, 255, 255, 0.06);
+  --pre-bg: rgba(0, 0, 0, 0.4);
+
+  --chat-panel-bg: rgba(10, 10, 18, 0.92);
+
+  --aurora-opacity: 1;
+  --grid-opacity: 1;
+  --cursor-glow-opacity: 1;
+  --sparkle-opacity: 1;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* scroll-behavior handled by Lenis smooth scroll */
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Self-hosted fonts */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/PlusJakartaSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/PlusJakartaSans-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/PlusJakartaSans-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/PlusJakartaSans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/PlusJakartaSans-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}

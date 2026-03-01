@@ -1,0 +1,155 @@
+---
+import type { Locale } from '../../i18n/utils';
+import { useTranslations, getLocalePath } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <span class="logo-text">Co</span><span class="logo-accent">Shift</span>
+      </div>
+      <p class="footer-tagline">{t('footer.tagline')}</p>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="footer-heading">{t('footer.nav')}</h4>
+      <a href={getLocalePath('/#services', locale)}>{t('nav.services')}</a>
+      <a href={getLocalePath('/#impact', locale)}>{t('nav.impact')}</a>
+      <a href={getLocalePath('/#use-cases', locale)}>{t('nav.usecases')}</a>
+      <a href={getLocalePath('/blog', locale)}>{t('nav.blog')}</a>
+      <a href={getLocalePath('/#contact', locale)}>{t('nav.contact')}</a>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="footer-heading">{t('footer.services')}</h4>
+      <a href={getLocalePath('/#services', locale)}>{t('footer.s1')}</a>
+      <a href={getLocalePath('/#services', locale)}>{t('footer.s2')}</a>
+      <a href={getLocalePath('/#services', locale)}>{t('footer.s3')}</a>
+      <a href={getLocalePath('/#services', locale)}>{t('footer.s4')}</a>
+      <a href={getLocalePath('/#services', locale)}>{t('footer.s6')}</a>
+    </div>
+
+    <div class="footer-col footer-trust">
+      <div class="trust-badge">{t('footer.data')}</div>
+      <div class="trust-badges">
+        <span class="badge">{t('footer.gdpr')}</span>
+        <span class="badge">{t('footer.euai')}</span>
+        <span class="badge">{t('footer.iso')}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {year} CoShift. {t('footer.rights')}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border-glass);
+    padding: 64px 24px 32px;
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 12px;
+  }
+
+  .logo-text { color: var(--text-primary); }
+  .logo-accent { color: var(--accent); }
+
+  .footer-tagline {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 280px;
+  }
+
+  .footer-heading {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col a {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--accent);
+  }
+
+  .trust-badge {
+    font-size: 0.875rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .trust-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border: 1px solid var(--border-glass);
+    border-radius: 6px;
+    width: fit-content;
+    font-weight: 500;
+  }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 48px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-subtle);
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>

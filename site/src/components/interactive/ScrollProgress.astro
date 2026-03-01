@@ -1,0 +1,43 @@
+---
+---
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('astro:page-load', () => {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+
+    // Reset to 0 on page transition (element persists via transition:persist)
+    gsap.set(bar, { scaleX: 0 });
+
+    gsap.to(bar, {
+      scaleX: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.3,
+      }
+    });
+  });
+</script>
+
+<style>
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-violet), var(--accent-gold));
+    transform-origin: left;
+    transform: scaleX(0);
+    z-index: 999;
+    pointer-events: none;
+  }
+</style>

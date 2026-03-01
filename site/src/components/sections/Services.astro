@@ -1,0 +1,63 @@
+---
+import type { Locale } from '../../i18n/utils';
+import { useTranslations, getLocalePath } from '../../i18n/utils';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const serviceIcons = [
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="9" height="9" rx="2"/><rect x="13" y="2" width="9" height="9" rx="2"/><rect x="2" y="13" width="9" height="9" rx="2"/><rect x="13" y="13" width="9" height="9" rx="2"/></svg>',
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+];
+
+const serviceStyles = [
+  { bg: 'rgba(0, 212, 170, 0.1)', border: 'rgba(0, 212, 170, 0.15)' },
+  { bg: 'rgba(124, 107, 218, 0.1)', border: 'rgba(124, 107, 218, 0.15)' },
+  { bg: 'rgba(201, 162, 39, 0.1)', border: 'rgba(201, 162, 39, 0.15)' },
+  { bg: 'rgba(124, 107, 218, 0.1)', border: 'rgba(124, 107, 218, 0.15)' },
+  { bg: 'rgba(0, 212, 170, 0.1)', border: 'rgba(0, 212, 170, 0.15)' },
+];
+
+// Map display index to i18n service keys (service 5 = old ISO removed, service 6 = old AI-optimalisatie now at 5)
+const serviceKeys = [1, 2, 3, 4, 6];
+---
+
+<section id="services" class="section">
+  <p class="section-label reveal">{t('services.label')}</p>
+  <h2 class="section-title reveal reveal-delay-1">{t('services.title.1')} <span class="gradient-text">{t('services.title.2')}</span>.</h2>
+  <p class="section-desc reveal reveal-delay-2">{t('services.desc')}</p>
+  <div class="services-grid">
+    {serviceKeys.map((key, idx) => (
+      <div class={`service-card glass reveal reveal-delay-${(idx % 3) + 1}`}>
+        <div class="service-icon-wrap" style={`background: ${serviceStyles[idx].bg}; border-color: ${serviceStyles[idx].border}`}>
+          <Fragment set:html={serviceIcons[idx]} />
+        </div>
+        <h3 class="service-title">{t(`service.${key}.title`)}</h3>
+        <p class="service-desc">{t(`service.${key}.desc`)}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .services-grid .service-card:nth-child(4),
+  .services-grid .service-card:nth-child(5) { max-width: 100%; }
+  .service-card { padding: 32px; transition: border-color 0.3s ease, background 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; cursor: default; position: relative; overflow: hidden; }
+  .service-card:hover { border-color: var(--card-border); background: var(--card-bg-hover); box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+  .service-icon-wrap { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; color: var(--text-primary); border: 1px solid; position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .service-card:hover .service-icon-wrap { transform: scale(1.05); }
+  .service-title { font-size: 1.15rem; margin-bottom: 10px; font-weight: 600; position: relative; }
+  .service-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; position: relative; }
+
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  }
+  @media (min-width: 601px) and (max-width: 900px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

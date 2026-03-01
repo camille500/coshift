@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import ProcessScanner from '../components/sections/ProcessScanner.astro';
+import Services from '../components/sections/Services.astro';
+import Impact from '../components/sections/Impact.astro';
+import Manifesto from '../components/sections/Manifesto.astro';
+import UseCases from '../components/sections/UseCases.astro';
+import Features from '../components/sections/Features.astro';
+import Process from '../components/sections/Process.astro';
+import BlogPreview from '../components/sections/BlogPreview.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import Contact from '../components/sections/Contact.astro';
+import GlowSeparator from '../components/ui/GlowSeparator.astro';
+
+const locale = 'nl' as const;
+---
+
+<BaseLayout
+  title="CoShift | AI voor het MKB — Automatisering, custom tools & ISO-certificering"
+  description="AI-automatisering speciaal voor het MKB. Ontdek hoe AI jouw bedrijfsprocessen slimmer maakt — van factuurverwerking tot klantenservice. Resultaat in weken. Gratis kennismaking."
+  locale={locale}
+>
+  <Hero locale={locale} />
+  <Services locale={locale} />
+  <GlowSeparator />
+  <Impact locale={locale} />
+  <ProcessScanner locale={locale} />
+  <Manifesto locale={locale} />
+  <GlowSeparator />
+  <UseCases locale={locale} />
+  <Features locale={locale} />
+  <Process locale={locale} />
+  <GlowSeparator />
+  <BlogPreview locale={locale} />
+  <FAQ locale={locale} />
+  <GlowSeparator />
+  <Contact locale={locale} />
+</BaseLayout>

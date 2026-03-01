@@ -1,0 +1,39 @@
+---
+import type { Locale } from '../../i18n/utils';
+import { useTranslations } from '../../i18n/utils';
+import AIProcessScanner from '../interactive/AIProcessScanner';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// Collect all scanner translations to pass to React component
+const scannerKeys = [
+  'scanner.scanning', 'scanner.cta',
+  'scanner.result.saving', 'scanner.result.approach',
+  'scanner.cat.1', 'scanner.cat.2', 'scanner.cat.3', 'scanner.cat.4', 'scanner.cat.5', 'scanner.cat.6', 'scanner.cat.7', 'scanner.cat.8',
+  'scanner.res.1.saving', 'scanner.res.1.approach',
+  'scanner.res.2.saving', 'scanner.res.2.approach',
+  'scanner.res.3.saving', 'scanner.res.3.approach',
+  'scanner.res.4.saving', 'scanner.res.4.approach',
+  'scanner.res.5.saving', 'scanner.res.5.approach',
+  'scanner.res.6.saving', 'scanner.res.6.approach',
+  'scanner.res.7.saving', 'scanner.res.7.approach',
+  'scanner.res.8.saving', 'scanner.res.8.approach',
+];
+const translations: Record<string, string> = {};
+scannerKeys.forEach(key => { translations[key] = t(key); });
+---
+
+<section class="section section-scanner">
+  <p class="section-label reveal">{t('scanner.label')}</p>
+  <h2 class="section-title reveal reveal-delay-1">{t('scanner.title.1')} <span class="gradient-text">{t('scanner.title.2')}</span>?</h2>
+  <p class="section-desc reveal reveal-delay-2">{t('scanner.desc')}</p>
+  <div class="reveal reveal-delay-3">
+    <AIProcessScanner client:visible locale={locale} translations={translations} />
+  </div>
+</section>
+
+<style>
+  .section-scanner { padding-bottom: 80px; }
+</style>

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.nuxt/
+.output/
+.astro/
+*.log
+.DS_Store
+.env
+.env.local
+cdk.out/
+cdk.context.json
+site/src/generated/

@@ -1,0 +1,38 @@
+---
+---
+<script>
+  import Lenis from 'lenis';
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let lenis: Lenis | null = null;
+  let tickerFn: ((time: number) => void) | null = null;
+
+  function initLenis() {
+    // Remove previous ticker callback to prevent leaks on View Transitions
+    if (tickerFn) { gsap.ticker.remove(tickerFn); tickerFn = null; }
+    if (lenis) { lenis.destroy(); lenis = null; }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+    });
+
+    // Sync Lenis with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+    tickerFn = (time: number) => { lenis?.raf(time * 1000); };
+    gsap.ticker.add(tickerFn);
+    gsap.ticker.lagSmoothing(0);
+
+    // Signal that Lenis is ready so GSAP animations can refresh with correct scroll positions
+    document.dispatchEvent(new CustomEvent('lenis:ready'));
+  }
+
+  document.addEventListener('astro:page-load', initLenis);
+</script>

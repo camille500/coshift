@@ -1,0 +1,58 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 | CoShift"
+  description="Pagina niet gevonden"
+  locale="nl"
+>
+  <section class="not-found">
+    <h1 class="nf-title"><span class="gradient-text">404</span></h1>
+    <p class="nf-desc">Deze pagina is verschoven naar een andere dimensie.</p>
+    <a href="/" class="nf-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Terug naar home
+    </a>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 24px;
+  }
+  .nf-title {
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .nf-desc {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+  }
+  .nf-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--accent);
+    color: var(--bg-deep);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    transition: transform 0.25s ease, box-shadow 0.35s ease;
+  }
+  .nf-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 212, 170, 0.4);
+  }
+</style>

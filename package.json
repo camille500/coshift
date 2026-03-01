@@ -1,17 +1,9 @@
 {
-  "name": "nova-delta",
+  "name": "coshift",
   "private": true,
-  "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview"
-  },
-  "dependencies": {
-    "nuxt": "^3.14.0"
-  },
-  "devDependencies": {
-    "@nuxt/devtools": "latest"
+    "dev": "npm run dev --prefix site",
+    "build": "npm run build --prefix site",
+    "preview": "npm run preview --prefix site"
   }
 }

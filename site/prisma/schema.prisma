@@ -7,19 +7,41 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 model User {
   id        String   @id // Clerk user ID
   email     String   @unique
   name      String?
   avatar    String?
+  role      Role     @default(USER)
   locale    String   @default("nl")
   settings  Json     @default("{}")
-  orgId     String?  @map("org_id")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@index([orgId])
+  memberships OrganizationMember[]
+
   @@map("users")
+}
+
+model OrganizationMember {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  orgId     String   @map("org_id")
+  role      Role     @default(USER)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, orgId])
+  @@index([orgId])
+  @@map("organization_members")
 }
 
 model BlogPost {
@@ -51,6 +73,8 @@ model Organization {
   type      String   @default("client")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  members OrganizationMember[]
 
   @@map("organizations")
 }

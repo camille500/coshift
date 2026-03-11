@@ -1,10 +1,11 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import BlogEditor from '../../../components/admin/BlogEditor';
-import { isAdminOrg } from '../../../lib/auth';
+import { isUserAdmin } from '../../../lib/auth';
+import '../../../styles/tiptap-editor.css';
 
 const auth = Astro.locals.auth();
-if (!auth.userId || !(await isAdminOrg(auth.orgId))) {
+if (!auth.userId || !(await isUserAdmin(auth.userId))) {
   return Astro.redirect('/');
 }
 ---
@@ -14,83 +15,10 @@ if (!auth.userId || !(await isAdminOrg(auth.orgId))) {
 </AdminLayout>
 
 <style is:global>
-  .tiptap {
-    outline: none;
-    min-height: 350px;
-  }
-  .tiptap p.is-editor-empty:first-child::before {
-    color: #787890;
-    content: attr(data-placeholder);
-    float: left;
-    height: 0;
-    pointer-events: none;
-  }
-  .tiptap h2 { font-size: 1.5rem; font-weight: 700; margin: 24px 0 12px; }
-  .tiptap h3 { font-size: 1.25rem; font-weight: 600; margin: 20px 0 10px; }
-  .tiptap h4 { font-size: 1.1rem; font-weight: 600; margin: 16px 0 8px; }
-  .tiptap p { margin-bottom: 12px; }
-  .tiptap ul, .tiptap ol { padding-left: 24px; margin-bottom: 12px; }
-  .tiptap li { margin-bottom: 4px; }
-  .tiptap blockquote {
-    border-left: 3px solid #00d4aa;
-    padding-left: 16px;
-    margin: 16px 0;
-    color: #787890;
-    font-style: italic;
-  }
-  .tiptap pre {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 6px;
-    padding: 16px;
-    overflow-x: auto;
-    margin-bottom: 12px;
-  }
-  .tiptap code {
-    font-size: 0.9em;
-    padding: 2px 4px;
-    background: rgba(0, 212, 170, 0.08);
-    border-radius: 3px;
-    color: #00d4aa;
-  }
-  .tiptap pre code {
-    background: none;
-    padding: 0;
-    color: inherit;
-  }
-  .tiptap img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 16px 0;
-  }
-  .tiptap table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 16px 0;
-  }
-  .tiptap th, .tiptap td {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px 12px;
-    text-align: left;
-  }
-  .tiptap th {
-    background: rgba(255, 255, 255, 0.04);
-    font-weight: 600;
-  }
-  .tiptap hr {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    margin: 24px 0;
-  }
-  .tiptap a {
-    color: #00d4aa;
-    text-decoration: underline;
-  }
-  .tiptap mark {
-    background: rgba(0, 212, 170, 0.2);
-    color: inherit;
-    border-radius: 2px;
-    padding: 1px 2px;
+  /* Hide admin header on editor pages — editor has its own topbar */
+  .admin-header { display: none !important; }
+  .admin-content {
+    padding: 0 !important;
+    overflow: visible !important;
   }
 </style>

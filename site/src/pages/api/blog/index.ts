@@ -1,11 +1,11 @@
 import type { APIRoute } from 'astro';
 import { prisma } from '../../../lib/prisma';
-import { isAdminOrg } from '../../../lib/auth';
+import { isUserAdmin, getUserActiveOrgId } from '../../../lib/auth';
 import { slugify } from '../../../lib/utils';
 
 export const GET: APIRoute = async ({ locals }) => {
   const auth = locals.auth();
-  if (!auth.userId || !(await isAdminOrg(auth.orgId))) {
+  if (!auth.userId || !(await isUserAdmin(auth.userId))) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
   }
 
@@ -33,8 +33,13 @@ export const GET: APIRoute = async ({ locals }) => {
 
 export const POST: APIRoute = async ({ request, locals }) => {
   const auth = locals.auth();
-  if (!auth.userId || !auth.orgId || !(await isAdminOrg(auth.orgId))) {
+  if (!auth.userId || !(await isUserAdmin(auth.userId))) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
+  }
+
+  const orgId = await getUserActiveOrgId(auth.userId);
+  if (!orgId) {
+    return new Response(JSON.stringify({ error: 'No active organization' }), { status: 403 });
   }
 
   const body = await request.json();
@@ -64,7 +69,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       published: published ?? false,
       publishedAt: published ? new Date() : null,
       image: image || null,
-      orgId: auth.orgId,
+      orgId,
       createdBy: auth.userId,
     },
   });

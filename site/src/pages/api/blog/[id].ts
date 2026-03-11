@@ -1,11 +1,11 @@
 import type { APIRoute } from 'astro';
 import { prisma } from '../../../lib/prisma';
-import { isAdminOrg } from '../../../lib/auth';
+import { isUserAdmin } from '../../../lib/auth';
 import { slugify } from '../../../lib/utils';
 
 export const GET: APIRoute = async ({ params, locals }) => {
   const auth = locals.auth();
-  if (!auth.userId || !(await isAdminOrg(auth.orgId))) {
+  if (!auth.userId || !(await isUserAdmin(auth.userId))) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
   }
 
@@ -24,7 +24,7 @@ export const GET: APIRoute = async ({ params, locals }) => {
 
 export const PUT: APIRoute = async ({ params, request, locals }) => {
   const auth = locals.auth();
-  if (!auth.userId || !(await isAdminOrg(auth.orgId))) {
+  if (!auth.userId || !(await isUserAdmin(auth.userId))) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
   }
 
@@ -77,7 +77,7 @@ export const PUT: APIRoute = async ({ params, request, locals }) => {
 
 export const DELETE: APIRoute = async ({ params, locals }) => {
   const auth = locals.auth();
-  if (!auth.userId || !(await isAdminOrg(auth.orgId))) {
+  if (!auth.userId || !(await isUserAdmin(auth.userId))) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
   }
 

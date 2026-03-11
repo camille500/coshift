@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { clerkClient } from '@clerk/astro/server';
 import { prisma } from '../../../lib/prisma';
+import { setUserActiveOrgId } from '../../../lib/auth';
 
 export const POST: APIRoute = async (context) => {
   const auth = context.locals.auth();
@@ -16,28 +16,30 @@ export const POST: APIRoute = async (context) => {
   }
 
   try {
-    // Create organization in Clerk (user becomes admin automatically)
-    const clerk = clerkClient(context);
-    const clerkOrg = await clerk.organizations.createOrganization({
-      name: name.trim(),
-      createdBy: auth.userId,
-    });
+    const orgId = crypto.randomUUID();
 
-    // Sync to our Prisma database
+    // Create organization in our Prisma database
     await prisma.organization.create({
       data: {
-        id: clerkOrg.id,
-        name: clerkOrg.name,
+        id: orgId,
+        name: name.trim(),
         type: 'client',
       },
     });
 
-    // Set this org as the user's active organization
-    await clerk.users.updateUser(auth.userId, {
-      publicMetadata: { orgId: clerkOrg.id },
+    // Create membership record — creator is org ADMIN
+    await prisma.organizationMember.create({
+      data: {
+        userId: auth.userId,
+        orgId,
+        role: 'ADMIN',
+      },
     });
 
-    return new Response(JSON.stringify({ id: clerkOrg.id, name: clerkOrg.name, type: 'client' }), {
+    // Set this org as the user's active organization
+    await setUserActiveOrgId(auth.userId, orgId);
+
+    return new Response(JSON.stringify({ id: orgId, name: name.trim(), type: 'client' }), {
       status: 201,
       headers: { 'Content-Type': 'application/json' },
     });

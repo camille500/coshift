@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { clerkClient } from '@clerk/astro/server';
 import { prisma } from '../../../lib/prisma';
+import { setUserActiveOrgId } from '../../../lib/auth';
 
 export const POST: APIRoute = async (context) => {
   const auth = context.locals.auth();
@@ -32,12 +32,13 @@ export const POST: APIRoute = async (context) => {
       return new Response(JSON.stringify({ error: 'Invite code has reached maximum uses' }), { status: 410 });
     }
 
-    // Add user to the Clerk organization
-    const clerk = clerkClient(context);
-    await clerk.organizations.createOrganizationMembership({
-      organizationId: invite.orgId,
-      userId: auth.userId,
-      role: 'org:member',
+    // Create membership record — joiner is regular USER
+    await prisma.organizationMember.create({
+      data: {
+        userId: auth.userId,
+        orgId: invite.orgId,
+        role: 'USER',
+      },
     });
 
     // Increment invite usage
@@ -45,6 +46,9 @@ export const POST: APIRoute = async (context) => {
       where: { id: invite.id },
       data: { uses: { increment: 1 } },
     });
+
+    // Set this org as the user's active organization
+    await setUserActiveOrgId(auth.userId, invite.orgId);
 
     const org = await prisma.organization.findUnique({
       where: { id: invite.orgId },

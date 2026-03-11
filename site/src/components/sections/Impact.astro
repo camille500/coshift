@@ -6,10 +6,10 @@ interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const counterData = [
-  { value: '85', suffix: '%' },
-  null,
-  { value: '100', suffix: '%' },
+const icons = [
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
 ];
 ---
 
@@ -20,25 +20,11 @@ const counterData = [
   <div class="impact-grid">
     {[1, 2, 3].map((i) => (
       <div class={`impact-card glass reveal reveal-delay-${i}`}>
-        <div class="impact-before">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          <span>{t(`impact.${i}.before`)}</span>
+        <div class="impact-icon">
+          <Fragment set:html={icons[i - 1]} />
         </div>
-        <div class="impact-arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-        <div class="impact-after">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>{t(`impact.${i}.after`)}</span>
-        </div>
-        <div class="impact-metric">
-          {counterData[i-1] ? (
-            <span class="impact-metric-value" data-counter-value={counterData[i-1]!.value} data-counter-suffix={counterData[i-1]!.suffix}>0{counterData[i-1]!.suffix}</span>
-          ) : (
-            <span class="impact-metric-value">{t(`impact.${i}.metric`)}</span>
-          )}
-          <span class="impact-metric-label">{t(`impact.${i}.metricLabel`)}</span>
-        </div>
+        <h3 class="impact-title">{t(`impact.${i}.title`)}</h3>
+        <p class="impact-desc">{t(`impact.${i}.desc`)}</p>
       </div>
     ))}
   </div>
@@ -51,14 +37,11 @@ const counterData = [
 <style>
   .section-impact { background: linear-gradient(180deg, transparent, var(--bg-surface), transparent); }
   .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .impact-card { padding: 32px; display: flex; flex-direction: column; gap: 16px; transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease; }
+  .impact-card { padding: 36px 32px; display: flex; flex-direction: column; gap: 12px; transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease; }
   .impact-card:hover { border-color: var(--card-border); transform: translateY(-3px); box-shadow: var(--card-shadow-hover); }
-  .impact-before { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: var(--text-muted); text-decoration: line-through; opacity: 0.6; }
-  .impact-arrow { display: flex; justify-content: center; animation: bounce-right 2s ease-in-out infinite; }
-  .impact-after { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-primary); font-weight: 500; }
-  .impact-metric { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-glass); display: flex; align-items: baseline; gap: 8px; }
-  .impact-metric-value { font-family: var(--font-display); font-size: 2.25rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
-  .impact-metric-label { font-size: 0.8125rem; color: var(--text-muted); font-weight: 500; }
+  .impact-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: rgba(0, 212, 170, 0.08); color: var(--accent); margin-bottom: 4px; }
+  .impact-title { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em; }
+  .impact-desc { color: var(--text-muted); font-size: 0.925rem; line-height: 1.65; }
   .impact-bottom { text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 48px; font-size: 1.0625rem; color: var(--text-secondary); font-weight: 500; }
 
   @media (max-width: 900px) {

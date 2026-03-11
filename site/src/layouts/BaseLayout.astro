@@ -28,8 +28,8 @@ const siteURL = 'https://coshift.nl';
 const canonical = canonicalURL || new URL(Astro.url.pathname, siteURL).toString();
 const t = useTranslations(locale);
 
-const nlKeywords = 'AI automatisering, AI consultancy Nederland, procesautomatisering AI, AI implementatie bedrijven, AI advies, chatbot laten maken, AI voor bedrijven, AI voor MKB, private AI omgeving, ISO 42001 certificering, ISO 27001 begeleiding, EU AI Act compliance, NIS2 compliance, AI workshop bedrijven, AI training medewerkers, AI strategie, MCP implementatie, RAG implementatie, AI tools op maat, AI readiness assessment, AI voor kleine bedrijven, AI voor MKB Nederland, AI toepassen in je bedrijf, automatisering klein bedrijf, chatbot voor MKB, AI administratie automatiseren, AI klantenservice MKB, wat kan AI voor mijn bedrijf, AI implementatie MKB kosten, AI zonder technische kennis';
-const enKeywords = 'AI automation, AI consultancy Netherlands, AI process automation, AI implementation business, AI consulting, custom chatbot, AI for business, AI for SME, private AI environment, ISO 42001 certification, ISO 27001 guidance, EU AI Act compliance, NIS2 compliance, AI workshop, AI training employees, AI strategy, MCP implementation, RAG implementation, custom AI tools, AI readiness assessment';
+const nlKeywords = 'AI automatisering, AI consultancy Nederland, procesautomatisering AI, AI implementatie bedrijven, AI advies, chatbot laten maken, AI voor bedrijven, AI voor MKB, private AI omgeving, ISO 42001 compliance, ISO 27001 begeleiding, EU AI Act compliance, AI workshop bedrijven, AI training medewerkers, AI strategie, MCP implementatie, RAG implementatie, AI tools op maat, AI readiness assessment, AI voor kleine bedrijven, AI voor MKB Nederland, AI toepassen in je bedrijf, automatisering klein bedrijf, chatbot voor MKB, AI administratie automatiseren, AI klantenservice MKB, wat kan AI voor mijn bedrijf, AI implementatie MKB kosten, AI zonder technische kennis';
+const enKeywords = 'AI automation, AI consultancy Netherlands, AI process automation, AI implementation business, AI consulting, custom chatbot, AI for business, AI for SME, private AI environment, ISO 42001 compliance, ISO 27001 guidance, EU AI Act compliance, AI workshop, AI training employees, AI strategy, MCP implementation, RAG implementation, custom AI tools, AI readiness assessment';
 
 const faqItems = Array.from({ length: 13 }, (_, i) => ({
   "@type": "Question" as const,
@@ -51,8 +51,8 @@ const structuredData = JSON.stringify([
     "@type": "ProfessionalService",
     "name": "CoShift",
     "description": locale === 'nl'
-      ? "AI-automatisering, custom AI-tools, private AI-omgevingen en ISO-certificering voor bedrijven in Nederland"
-      : "AI automation, custom AI tools, private AI environments and ISO certification for businesses in the Netherlands",
+      ? "AI-automatisering, custom AI-tools, private AI-omgevingen en ISO-compliance voor bedrijven in Nederland"
+      : "AI automation, custom AI tools, private AI environments and ISO compliance for businesses in the Netherlands",
     "url": siteURL,
     "address": {
       "@type": "PostalAddress",
@@ -73,7 +73,6 @@ const structuredData = JSON.stringify([
       "MCP Implementation",
       "RAG Implementation",
       "EU AI Act Compliance",
-      "NIS2 Compliance",
       "AI Strategy & Roadmap",
       "AI Readiness Assessment",
       "Voice AI & Conversational Agents"

@@ -9,9 +9,11 @@ frontend:
       commands:
         - npm run build --prefix site
   artifacts:
-    baseDirectory: site/dist
+    baseDirectory: site
     files:
-      - '**/*'
+      - dist/**/*
+      - node_modules/**/*
+      - package.json
   cache:
     paths:
       - site/node_modules/**/*

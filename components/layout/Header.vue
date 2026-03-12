@@ -1,5 +1,5 @@
 <template>
-  <header :class="['header', { scrolled: isScrolled }]" :style="{ top: bannerVisible ? '32px' : '0' }" id="site-header">
+  <header :class="['header', { scrolled: isScrolled }]" :style="{ top: bannerVisible ? '28px' : '0' }" id="site-header">
     <div class="header-inner">
       <NuxtLink :to="localePath('/')" class="logo">
         <span class="logo-text">Co</span><span class="logo-accent">Shift</span>
@@ -140,7 +140,7 @@ function closeMenu() {
   top: 0; left: 0; right: 0;
   z-index: 100;
   padding: 16px 24px;
-  transition: background 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
+  transition: background 0.4s ease, border-color 0.4s ease, padding 0.3s ease, top 0.3s ease;
   border-bottom: 1px solid transparent;
 }
 

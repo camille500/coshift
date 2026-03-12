@@ -32,50 +32,53 @@ function dismiss() {
 
 <style scoped>
 .dev-banner {
-  background: var(--accent);
-  color: var(--bg-deep);
-  font-size: 0.8rem;
-  font-weight: 500;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 400;
   text-align: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 102;
+  z-index: 101;
 }
 
 .dev-banner-inner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 7px 48px 7px 24px;
+  padding: 5px 40px 5px 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .dev-banner-icon {
   flex-shrink: 0;
-  opacity: 0.8;
+  opacity: 0.4;
+  width: 12px;
+  height: 12px;
 }
 
 .dev-banner-close {
   position: absolute;
-  right: 16px;
+  right: 12px;
   background: none;
   border: none;
-  color: var(--bg-deep);
+  color: var(--text-muted);
   cursor: pointer;
-  padding: 4px;
+  padding: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.7;
+  opacity: 0.4;
   transition: opacity 0.2s ease;
   border-radius: 4px;
 }
 
 .dev-banner-close:hover {
-  opacity: 1;
+  opacity: 0.8;
 }
 </style>

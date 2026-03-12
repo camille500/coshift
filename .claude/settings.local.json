@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r \"await\\\\|async\" /Users/camille/websute/components/sections/*.vue /Users/camille/websute/components/layout/*.vue)",
+      "mcp__context7__query-docs",
+      "Bash(npx nuxi:*)",
+      "mcp__playwright__browser_evaluate"
+    ]
+  }
+}

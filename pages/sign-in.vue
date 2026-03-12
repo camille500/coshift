@@ -1,0 +1,22 @@
+<template>
+  <div class="auth-page">
+    <SignIn force-redirect-url="/" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { SignIn } from '@clerk/nuxt/components';
+
+definePageMeta({ layout: false });
+</script>
+
+<style scoped>
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-deep);
+  padding: 24px;
+}
+</style>

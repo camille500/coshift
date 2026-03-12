@@ -3,17 +3,16 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci --prefix site
-        - npm run db:generate --prefix site
+        - npm ci
+        - npx prisma generate
     build:
       commands:
-        - npm run build --prefix site
+        - npm run build
   artifacts:
-    baseDirectory: site
+    baseDirectory: .output
     files:
-      - dist/**/*
-      - node_modules/**/*
-      - package.json
+      - '**/*'
   cache:
     paths:
-      - site/node_modules/**/*
+      - node_modules/**/*
+      - .nuxt/**/*

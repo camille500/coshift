@@ -1,0 +1,119 @@
+<template>
+  <div>
+    <div class="dashboard-grid">
+      <div class="stat-card">
+        <span class="stat-label">Totaal posts</span>
+        <span class="stat-value">{{ stats?.total ?? '–' }}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Gepubliceerd</span>
+        <span class="stat-value accent">{{ stats?.published ?? '–' }}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Concepten</span>
+        <span class="stat-value">{{ stats?.drafts ?? '–' }}</span>
+      </div>
+    </div>
+
+    <div class="quick-actions">
+      <NuxtLink to="/admin/blog/new" class="action-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        Nieuwe blogpost
+      </NuxtLink>
+      <NuxtLink to="/admin/blog" class="action-btn-ghost">
+        Alle posts bekijken
+      </NuxtLink>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ layout: 'admin' });
+
+provide('adminTitle', 'Dashboard');
+
+const { data: posts } = await useFetch<any[]>('/api/blog');
+
+const stats = computed(() => {
+  if (!posts.value) return null;
+  const total = posts.value.length;
+  const published = posts.value.filter(p => p.published).length;
+  return { total, published, drafts: total - published };
+});
+</script>
+
+<style scoped>
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: rgba(14, 14, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.stat-value.accent {
+  color: var(--accent);
+}
+
+.quick-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--accent);
+  color: var(--bg-deep);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 212, 170, 0.3);
+}
+
+.action-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.action-btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+}
+</style>

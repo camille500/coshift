@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   modules: [
     '@clerk/nuxt',
     '@nuxtjs/i18n',
+    '@zadigetvoltaire/nuxt-gtm',
   ],
 
   css: [
@@ -40,7 +41,19 @@ export default defineNuxtConfig({
       clerk: {
         publishableKey: process.env.NUXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
       },
+      gtmId: process.env.NUXT_PUBLIC_GTM_ID,
     },
+  },
+
+  gtm: {
+    id: process.env.NUXT_PUBLIC_GTM_ID || '',
+    defer: true,
+    compatibility: false,
+    enabled: true,
+    debug: false,
+    loadScript: true,
+    enableRouterSync: true,
+    trackOnNextTick: false,
   },
 
   clerk: {

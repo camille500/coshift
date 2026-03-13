@@ -218,4 +218,8 @@ export const en: Record<string, string> = {
   'footer.euai': 'EU AI Act ready',
   'footer.iso': 'ISO 27001 · 42001',
   'footer.rights': 'All rights reserved.',
+
+  'cookie.message': 'We use cookies to improve your experience and analyze website traffic.',
+  'cookie.accept': 'Accept',
+  'cookie.decline': 'Decline',
 }

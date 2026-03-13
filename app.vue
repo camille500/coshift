@@ -8,6 +8,7 @@
       <ScrollProgress />
       <SmoothScroll />
       <GSAPAnimations />
+      <CookieConsent />
     </ClientOnly>
 
     <!-- Page content with layout -->

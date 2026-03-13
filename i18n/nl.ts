@@ -217,4 +217,8 @@ export const nl: Record<string, string> = {
   'footer.euai': 'EU AI Act ready',
   'footer.iso': 'ISO 27001 · 42001',
   'footer.rights': 'Alle rechten voorbehouden.',
+
+  'cookie.message': 'Wij gebruiken cookies om uw ervaring te verbeteren en het websiteverkeer te analyseren.',
+  'cookie.accept': 'Accepteren',
+  'cookie.decline': 'Weigeren',
 }

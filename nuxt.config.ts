@@ -41,17 +41,11 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'aws-amplify',
-    externals: {
-      external: ['pg', '@prisma/adapter-pg'],
-    },
   },
 
   vite: {
     optimizeDeps: {
-      exclude: ['@prisma/client', '@prisma/adapter-pg', 'pg'],
-    },
-    ssr: {
-      external: ['pg', '@prisma/adapter-pg', '@prisma/client'],
+      exclude: ['@prisma/client'],
     },
   },
 

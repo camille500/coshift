@@ -13,7 +13,6 @@
 
 <script setup lang="ts">
 const { locale, t } = useI18n();
-const route = useRoute();
 
 const bannerDismissed = ref(false);
 const bannerVisible = computed(() => !bannerDismissed.value);
@@ -28,14 +27,7 @@ const props = defineProps<{
 const title = computed(() => props.title || 'CoShift');
 const description = computed(() => props.description || '');
 
-const canonical = computed(() => `${siteURL}${route.path}`);
-
-const nlHref = computed(() =>
-  locale.value === 'nl' ? `${siteURL}${route.path}` : `${siteURL}${route.path.replace(/^\/en\//, '/')}`,
-);
-const enHref = computed(() =>
-  locale.value === 'en' ? `${siteURL}${route.path}` : `${siteURL}/en${route.path}`,
-);
+// canonical and hreflang are handled automatically by @nuxtjs/seo + @nuxtjs/i18n
 
 const nlKeywords = 'AI automatisering, AI consultancy Nederland, procesautomatisering AI, AI implementatie bedrijven, AI advies, chatbot laten maken, AI voor bedrijven, AI voor MKB, private AI omgeving, ISO 42001 compliance, ISO 27001 begeleiding, EU AI Act compliance, AI workshop bedrijven, AI training medewerkers, AI strategie, MCP implementatie, RAG implementatie, AI tools op maat, AI readiness assessment';
 const enKeywords = 'AI automation, AI consultancy Netherlands, AI process automation, AI implementation business, AI consulting, custom chatbot, AI for business, AI for SME, private AI environment, ISO 42001 compliance, ISO 27001 guidance, EU AI Act compliance, AI workshop, AI training employees, AI strategy, MCP implementation, RAG implementation, custom AI tools, AI readiness assessment';
@@ -74,23 +66,6 @@ useHead(computed(() => ({
     { name: 'author', content: 'Camille — CoShift' },
     { name: 'geo.region', content: 'NL' },
     { name: 'geo.placename', content: 'Nederland' },
-    { property: 'og:title', content: title.value },
-    { property: 'og:description', content: description.value },
-    { property: 'og:url', content: canonical.value },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:locale', content: locale.value === 'nl' ? 'nl_NL' : 'en_US' },
-    { property: 'og:site_name', content: 'CoShift' },
-    { property: 'og:image', content: `${siteURL}/og-image.png` },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title.value },
-    { name: 'twitter:description', content: description.value },
-    { name: 'twitter:image', content: `${siteURL}/og-image.png` },
-  ],
-  link: [
-    { rel: 'canonical', href: canonical.value },
-    { rel: 'alternate', hreflang: 'nl', href: nlHref.value },
-    { rel: 'alternate', hreflang: 'en', href: enHref.value },
-    { rel: 'alternate', hreflang: 'x-default', href: nlHref.value },
   ],
   script: [{ type: 'application/ld+json', innerHTML: structuredDataJson.value }],
 })));

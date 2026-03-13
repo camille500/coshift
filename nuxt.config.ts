@@ -9,7 +9,31 @@ export default defineNuxtConfig({
     '@clerk/nuxt',
     '@nuxtjs/i18n',
     '@zadigetvoltaire/nuxt-gtm',
+    '@nuxtjs/seo',
   ],
+
+  site: {
+    url: 'https://coshift.nl',
+    name: 'CoShift',
+    description: 'AI-automatisering voor het MKB. Custom tools, procesoptimalisatie en compliance-advies.',
+    defaultLocale: 'nl',
+  },
+
+  robots: {
+    groups: [
+      { userAgent: ['GPTBot', 'ChatGPT-User', 'CCBot', 'Google-Extended'], disallow: ['/'] },
+      { userAgent: '*', allow: '/', disallow: ['/admin'] },
+    ],
+  },
+
+  sitemap: {
+    sources: ['/api/__sitemap__/urls'],
+  },
+
+  ogImage: {
+    enabled: true,
+    debug: false,
+  },
 
   css: [
     '~/assets/styles/global.css',

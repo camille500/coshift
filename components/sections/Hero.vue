@@ -10,7 +10,7 @@
       </div>
       <h1 class="hero-title reveal reveal-delay-1">
         {{ t('hero.title.1') }}<br />
-        <span class="gradient-text">{{ t('hero.title.2') }}</span>.
+        <span class="gradient-text">{{ t('hero.title.2') }}</span>
       </h1>
       <p class="hero-desc reveal reveal-delay-2">{{ t('hero.desc') }}</p>
       <div

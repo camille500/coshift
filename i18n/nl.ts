@@ -13,8 +13,9 @@ export const nl: Record<string, string> = {
 
   // Hero
   'hero.badge': 'AI voor het MKB · Automatisering · Custom tools',
-  'hero.title.1': 'AI werkt. Ook voor',
-  'hero.title.2': 'jouw bedrijf',
+  'hero.title.1': 'Als jij het kunt dromen,',
+  'hero.title.2': 'kunnen wij het maken',
+  'motto': 'Als jij het kunt dromen, kunnen wij het maken',
   'hero.desc': 'Elk bedrijf doet dingen die slimmer kunnen. Wij laten zien waar AI het verschil maakt — en bouwen het voor je. Geen enorm IT-project, maar concrete resultaten in weken.',
   'hero.cta.primary': 'Gratis kennismaking',
   'hero.cta.secondary': 'Bekijk wat wij doen',
@@ -123,10 +124,10 @@ export const nl: Record<string, string> = {
   'impact.bottom': 'Klaar om dit voor jouw organisatie te realiseren?',
 
   // Manifesto
-  'manifesto.line1': 'Jij kent je bedrijf.',
-  'manifesto.line2': 'Wij kennen de technologie.',
-  'manifesto.line3': 'Samen maken we processen',
-  'manifesto.line4': 'die zichzelf runnen.',
+  'manifesto.line1': 'Als jij het kunt dromen,',
+  'manifesto.line2': 'kunnen wij het maken.',
+  'manifesto.line3': 'Geen hype. Geen theorie.',
+  'manifesto.line4': 'Gewoon resultaat.',
 
   // Use cases
   'cases.label': 'Resultaten',
@@ -203,7 +204,7 @@ export const nl: Record<string, string> = {
   'contact.personal': 'Persoonlijk antwoord binnen 24 uur. Altijd.',
 
   // Footer
-  'footer.tagline': 'AI-automatisering voor het MKB. Custom tools, procesoptimalisatie en compliance-advies. Voor elk bedrijf dat slimmer wil werken.',
+  'footer.tagline': '"Als jij het kunt dromen, kunnen wij het maken." AI-automatisering voor het MKB. Custom tools, procesoptimalisatie en compliance-advies.',
   'footer.nav': 'Navigatie',
   'footer.services': 'Diensten',
   'footer.s1': 'Procesanalyse & Automatisering',

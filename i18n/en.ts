@@ -13,8 +13,9 @@ export const en: Record<string, string> = {
 
   // Hero
   'hero.badge': 'AI automation · Custom tools · Compliance advisory',
-  'hero.title.1': 'Your processes.',
-  'hero.title.2': 'Our expertise',
+  'hero.title.1': 'If you can dream it,',
+  'hero.title.2': 'we can make it work',
+  'motto': 'If you can dream it, we can make it work',
   'hero.desc': 'Anything you do twice can be smarter. We automate workflows, build custom AI tools and guide you from strategy to compliance.',
   'hero.cta.primary': 'Free consultation',
   'hero.cta.secondary': 'See what we do',
@@ -27,8 +28,8 @@ export const en: Record<string, string> = {
   'hero.typewriter.1': 'Automating invoice processing...',
   'hero.typewriter.2': 'Setting up private AI environments...',
   'hero.typewriter.3': 'Building custom AI chatbots...',
-  'hero.typewriter.4': 'Analyzing workflows...',
-  'hero.typewriter.5': 'Ensuring AI compliance...',
+  'hero.typewriter.4': 'Saving 20 hours a week on admin...',
+  'hero.typewriter.5': 'Connecting AI to your existing tools...',
   'hero.typewriter.6': 'Building AI agents for your team...',
 
   // FAQ
@@ -98,7 +99,7 @@ export const en: Record<string, string> = {
   'services.label': 'Services',
   'services.title.1': 'What we do',
   'services.title.2': 'for you',
-  'services.desc': 'From first analysis to running AI system. Hands-on, no theory.',
+  'services.desc': 'AI sounds big. But it starts small. We find where AI delivers the most value — and build it.',
   'service.1.title': 'Process Analysis & Automation',
   'service.1.desc': 'We map your workflows and identify what can be faster and smarter. Anything you do twice, we automate.',
   'service.2.title': 'Custom AI Tools',
@@ -124,16 +125,16 @@ export const en: Record<string, string> = {
   'impact.bottom': 'Ready to make this happen for your organization?',
 
   // Manifesto
-  'manifesto.line1': 'You know your business.',
-  'manifesto.line2': 'We know the technology.',
-  'manifesto.line3': 'Together we build processes',
-  'manifesto.line4': 'that run themselves.',
+  'manifesto.line1': 'If you can dream it,',
+  'manifesto.line2': 'we can make it work.',
+  'manifesto.line3': 'No hype. No theory.',
+  'manifesto.line4': 'Just results.',
 
   // Use cases
   'cases.label': 'Results',
   'cases.title.1': 'Any industry.',
   'cases.title.2': 'Any process',
-  'cases.desc': 'From SMB to enterprise. This is AI in practice.',
+  'cases.desc': 'Every business has processes that can be smarter. This is what AI does in practice.',
   'case.1.title': 'Document Processing',
   'case.1.desc': 'Invoices, claims, contracts — automatically processed, classified and routed. 85% less manual work. Live in weeks, not months.',
   'case.2.title': 'Customer Service',
@@ -204,7 +205,7 @@ export const en: Record<string, string> = {
   'contact.personal': 'Personal response within 24 hours. Always.',
 
   // Footer
-  'footer.tagline': 'AI automation, custom tools and compliance advisory. For every business that wants to work smarter.',
+  'footer.tagline': '"If you can dream it, we can make it work." AI automation, custom tools and compliance advisory for businesses that want to work smarter.',
   'footer.nav': 'Navigate',
   'footer.services': 'Services',
   'footer.s1': 'Process Analysis & Automation',

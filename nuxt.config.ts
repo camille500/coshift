@@ -40,7 +40,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'node-server',
+    preset: 'aws-amplify',
     externals: {
       external: ['pg', '@prisma/adapter-pg'],
     },

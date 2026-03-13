@@ -32,6 +32,17 @@ export default defineNuxtConfig({
     },
   },
 
+  runtimeConfig: {
+    clerk: {
+      secretKey: process.env.NUXT_CLERK_SECRET_KEY,
+    },
+    public: {
+      clerk: {
+        publishableKey: process.env.NUXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+      },
+    },
+  },
+
   clerk: {
     signInUrl: '/sign-in',
     signUpUrl: '/sign-up',
